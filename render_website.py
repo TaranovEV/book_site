@@ -17,6 +17,9 @@ def on_reload():
                                     os.path.basename(book['image_url'])
                                     )
                                   )
+        book['txt_url'] = (
+            quote('books/{title}.txt'.format(title=book['title']))
+        )
     env = Environment(loader=FileSystemLoader('.'),
                       autoescape=select_autoescape(['html', 'xml']))
 
