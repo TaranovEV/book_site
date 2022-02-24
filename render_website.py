@@ -12,22 +12,22 @@ def on_reload():
         books_description = json.load(file)
 
     for book in books_description:
-        book['image_url'] = quote(
-                            urljoin('images/',
-                                    os.path.basename(book['image_url'])
-                                    )
-                                  )
+        book['image_url'] = (
+            quote('../images/{}'.format(os.path.basename(book['image_url'])))
+        )
         book['txt_url'] = (
-            quote('books/{title}.txt'.format(title=book['title']))
+            quote('../books/{}.txt'.format(book['title']))
         )
     env = Environment(loader=FileSystemLoader('.'),
                       autoescape=select_autoescape(['html', 'xml']))
-
     template = env.get_template('template.html')
-    books_description = list(chunked(books_description, 2))
-    rendered_page = template.render(books_description=books_description)
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
+    os.makedirs('pages', exist_ok=True)
+    books_description = list(chunked(books_description, 20))
+    for page_number, books_chunk in enumerate(books_description, 1):
+        books_on_page = list(chunked(books_chunk, 2))
+        rendered_page = template.render(books_on_page=books_on_page)
+        with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
+            file.write(rendered_page)
 
 def main():
 
