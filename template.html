@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item{% if page_number == 1 %} disabled{% endif %}">
+        <a class="page-link" href="{% if page_number != 1 %} index{{ page_number - 1 }}.html {% endif %}" tabindex="-1" aria-disabled="true">Назад</a></li> 
+        {% for page_num in pages_numbers %}
+          <li class="page-item{% if  page_num == page_number  %} active{% endif %}"><a class="page-link" href="index{{ page_num }}.html">{{ page_num }}</a></li>
+        {% endfor %} 
+        <li class="page-item {% if pages_numbers | last == page_number %} disabled{% endif %}"><a class="page-link" href="{% if pages_numbers | last != page_number %} index{{ page_number + 1 }}.html {% endif %}">Вперёд</a></li>
+      </ul>
+    </nav>
     <div class="container">
       {% for chunk in books_on_page %}
         <div class="row">

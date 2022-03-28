@@ -3,8 +3,10 @@ import os
 from livereload import Server
 from more_itertools import chunked
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from urllib.parse import quote, urljoin
+from urllib.parse import quote
 
+
+COUNT_BOOKS_ON_PAGE = 20
 
 def on_reload():
 
@@ -22,10 +24,13 @@ def on_reload():
                       autoescape=select_autoescape(['html', 'xml']))
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
-    books_description = list(chunked(books_description, 20))
+    books_description = list(chunked(books_description, COUNT_BOOKS_ON_PAGE))
+    pages_numbers = [num for num, chunk in enumerate(books_description, 1)]
     for page_number, books_chunk in enumerate(books_description, 1):
         books_on_page = list(chunked(books_chunk, 2))
-        rendered_page = template.render(books_on_page=books_on_page)
+        rendered_page = template.render(books_on_page=books_on_page,
+                                        pages_numbers=pages_numbers,
+                                        page_number=page_number)
         with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
