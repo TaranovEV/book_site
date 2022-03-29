@@ -8,9 +8,16 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      nav {
+        padding-top: 15px;
+        padding-bottom: 8px;
+        padding-left: 120px;
+      }
+    </style>
   </head>
   <body>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation">
       <ul class="pagination">
         <li class="page-item{% if page_number == 1 %} disabled{% endif %}">
         <a class="page-link" href="{% if page_number != 1 %} index{{ page_number - 1 }}.html {% endif %}" tabindex="-1" aria-disabled="true">Назад</a></li> 
@@ -28,21 +35,25 @@
               <div class="card mb-3" style="max-width: 540px;">
               <div class="row no-gutters">
               <div class="col-md-4">
-                  <img src="{{ book['image_url'] }}" class="card-img" alt="Обложка">
+                <img src="{{ book['image_url'] }}" class="card-img" alt="Обложка">
               </div>
               <div class="col-md-8">
-                  <div class="card-body">
-                  <h5 class="card-title">{{ book['title'] }}</h5>
-                  <p class="card-text">{{ book['author'] }}</p>
-                  <a href="{{ book['txt_url'] }}" target="_blank" rel="noopener noreferrer">Читать</a>
-                  <p class="card-text"><small class="text-muted"></small></p>
-                  </div>
+                <div class="card-body">
+                <h5 class="card-title">{{ book['title'] }}</h5>
+                <p class="card-text">{{ book['author'] }}</p>
+                {% for genre in book['genres'] %}
+                  <span class="badge badge-pill badge-light">{{ genre }}</span>
+                {% endfor %}
+                <p class="card-text"><small class="text-muted"></small></p>
+                <a href="{{ book['txt_url'] }}" target="_blank" rel="noopener noreferrer">Читать</a>
+                <p class="card-text"><small class="text-muted"></small></p>
+                </div>
               </div>
               </div>
               </div>
             </div>
           {% endfor %}
-          </div>  
+        </div>  
       {% endfor %}
     </div>  
     <!-- Optional JavaScript -->

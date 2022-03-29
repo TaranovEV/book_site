@@ -8,6 +8,7 @@ from urllib.parse import quote
 
 COUNT_BOOKS_ON_PAGE = 20
 
+
 def on_reload():
 
     with open('books_description.json', 'r') as file:
@@ -31,8 +32,10 @@ def on_reload():
         rendered_page = template.render(books_on_page=books_on_page,
                                         pages_numbers=pages_numbers,
                                         page_number=page_number)
-        with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
+        with open(f'pages/index{page_number}.html',
+                  'w', encoding="utf8") as file:
             file.write(rendered_page)
+
 
 def main():
 
