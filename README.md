@@ -3,7 +3,8 @@
 Позволяет пополнить свою электронную библиотеку более чем 100 книгами. 
 
 
-[Демка сайта](https://taranovev.github.io/book_site/).
+[Демка сайта](https://taranovev.github.io/book_site/).  
+
 ![Внешний вид](/home/picture/1.png)
 
 ## Запуск
