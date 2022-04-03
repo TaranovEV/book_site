@@ -19,7 +19,7 @@ def on_reload():
             quote('../images/{}'.format(os.path.basename(book['image_url'])))
         )
         book['txt_url'] = (
-            quote('../books/{}.txt'.format(book['title']))
+            '../books/{}.txt'.format(book['title'])
         )
     env = Environment(loader=FileSystemLoader('.'),
                       autoescape=select_autoescape(['html', 'xml']))
