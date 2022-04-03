@@ -5,7 +5,7 @@
 
 [Демка сайта](https://taranovev.github.io/book_site/).  
 
-![Внешний вид](/home/picture/1.png)
+![Внешний вид](./demo_book_site.png)
 
 ## Запуск
 
