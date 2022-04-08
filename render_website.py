@@ -26,7 +26,7 @@ def on_reload():
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
     books_description = list(chunked(books_description, COUNT_BOOKS_ON_PAGE))
-    pages_numbers = [num for num, chunk in enumerate(books_description, 1)]
+    pages_numbers = list(range(1, len(books_description) + 1))
     for page_number, books_chunk in enumerate(books_description, 1):
         books_on_page = list(chunked(books_chunk, 2))
         rendered_page = template.render(books_on_page=books_on_page,

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>{% block title %}Book_page_{{ page_number }}{% endblock %}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,7 +45,7 @@
                   <span class="badge badge-pill badge-light">{{ genre }}</span>
                 {% endfor %}
                 <p class="card-text"><small class="text-muted"></small></p>
-                <a href="{{ book['txt_url'] }}" target="_blank" rel="noopener noreferrer">Читать</a>
+                <a href="{{ book['txt_url'] |urlencode }}" target="_blank" rel="noopener noreferrer">Читать</a>
                 <p class="card-text"><small class="text-muted"></small></p>
                 </div>
               </div>
